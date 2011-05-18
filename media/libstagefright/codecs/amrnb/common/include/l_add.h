@@ -108,7 +108,7 @@ extern "C"
     ----------------------------------------------------------------------------*/
 #if defined(PV_ARM_V5) /* Instructions for ARM Assembly on ADS*/
 
-    __inline Word32 L_add(register Word32 L_var1, register Word32 L_var2, Flag *pOverflow)
+    static __inline Word32 L_add(register Word32 L_var1, register Word32 L_var2, Flag *pOverflow)
     {
         Word32 result;
 
@@ -122,7 +122,7 @@ extern "C"
 
 #elif defined(PV_ARM_GCC_V5) /* Instructions for ARM-linux cross-compiler*/
 
-    __inline Word32 L_add(register Word32 L_var1, register Word32 L_var2, Flag *pOverflow)
+    static __inline Word32 L_add(register Word32 L_var1, register Word32 L_var2, Flag *pOverflow)
     {
         register Word32 ra = L_var1;
         register Word32 rb = L_var2;

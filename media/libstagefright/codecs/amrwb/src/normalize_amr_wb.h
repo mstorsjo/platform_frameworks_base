@@ -70,7 +70,7 @@ terms listed above has been obtained from the copyright holder.
 
 #if defined(PV_ARM_V5)
 
-__inline int16 normalize_amr_wb(int32 x)
+static __inline int16 normalize_amr_wb(int32 x)
 {
     int32 y;
     __asm
@@ -85,7 +85,7 @@ __inline int16 normalize_amr_wb(int32 x)
 #elif defined(PV_ARM_GCC_V5)
 
 
-__inline int16 normalize_amr_wb(int32 x)
+static __inline int16 normalize_amr_wb(int32 x)
 {
     register int32 y;
     register int32 ra = x;

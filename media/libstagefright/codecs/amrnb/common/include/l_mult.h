@@ -106,7 +106,7 @@ extern "C"
 
 #if defined(PV_ARM_V5) /* Instructions for ARM Assembly on ADS*/
 
-    __inline Word32 L_mult(Word16 var1, Word16 var2, Flag *pOverflow)
+    static __inline Word32 L_mult(Word16 var1, Word16 var2, Flag *pOverflow)
     {
         Word32 result;
         Word32 product;
@@ -124,7 +124,7 @@ extern "C"
 
 #elif defined(PV_ARM_GCC_V5) /* Instructions for ARM-linux cross-compiler*/
 
-    __inline Word32 L_mult(Word16 var1, Word16 var2, Flag *pOverflow)
+    static __inline Word32 L_mult(Word16 var1, Word16 var2, Flag *pOverflow)
     {
         register Word32 ra = var1;
         register Word32 rb = var2;

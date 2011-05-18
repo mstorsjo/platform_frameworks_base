@@ -108,7 +108,7 @@ extern "C"
 
 #elif defined(PV_ARM_V5)
 
-    __inline Word16 norm_l(Word32 L_var1)
+    static __inline Word16 norm_l(Word32 L_var1)
     {
         register Word32 var_out = 0;
 

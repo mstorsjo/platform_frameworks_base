@@ -90,7 +90,7 @@ extern "C"
     ----------------------------------------------------------------------------*/
 #if defined(PV_ARM_V5) /* Instructions for ARM Assembly on ADS*/
 
-    __inline Word32 Mpy_32_16(Word16 L_var1_hi,
+    static __inline Word32 Mpy_32_16(Word16 L_var1_hi,
     Word16 L_var1_lo,
     Word16 var2,
     Flag *pOverflow)
@@ -156,7 +156,7 @@ extern "C"
     }
 
 #else /* C_EQUIVALENT */
-    __inline Word32 Mpy_32_16(Word16 L_var1_hi,
+    static __inline Word32 Mpy_32_16(Word16 L_var1_hi,
                               Word16 L_var1_lo,
                               Word16 var2,
                               Flag *pOverflow)

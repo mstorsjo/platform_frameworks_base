@@ -59,7 +59,7 @@ extern "C"
 
 #if defined(PV_ARM_V5)
 
-    __inline int16 add_int16(int16 var1, int16 var2)
+    static __inline int16 add_int16(int16 var1, int16 var2)
     {
         int32 L_var_out;
         int32 L_var_aux;
@@ -76,7 +76,7 @@ extern "C"
     }
 
 
-    __inline int16 sub_int16(int16 var1, int16 var2)
+    static __inline int16 sub_int16(int16 var1, int16 var2)
     {
         int32 L_var_out;
         int32 L_var_aux;
@@ -93,7 +93,7 @@ extern "C"
     }
 
 
-    __inline int32 add_int32(int32 L_var1, int32 L_var2)
+    static __inline int32 add_int32(int32 L_var1, int32 L_var2)
     {
         int32 L_var_out;
 
@@ -105,7 +105,7 @@ extern "C"
     }
 
 
-    __inline int32 mac_16by16_to_int32(int32 L_var3, int16 var1, int16 var2)
+    static __inline int32 mac_16by16_to_int32(int32 L_var3, int16 var1, int16 var2)
     {
         int32 L_var_out;
 
@@ -118,7 +118,7 @@ extern "C"
         return L_var_out;
     }
 
-    __inline int32 sub_int32(int32 L_var1, int32 L_var2)
+    static __inline int32 sub_int32(int32 L_var1, int32 L_var2)
     {
         int32 L_var_out;
 
@@ -129,7 +129,7 @@ extern "C"
         return L_var_out;
     }
 
-    __inline int32 msu_16by16_from_int32(int32 L_var3, int16 var1, int16 var2)
+    static __inline int32 msu_16by16_from_int32(int32 L_var3, int16 var1, int16 var2)
     {
         int32 L_var_out;
 
@@ -142,7 +142,7 @@ extern "C"
         return L_var_out;
     }
 
-    __inline int32 mul_16by16_to_int32(int16 var1, int16 var2)
+    static __inline int32 mul_16by16_to_int32(int16 var1, int16 var2)
     {
         int32 L_var_out;
 
@@ -154,7 +154,7 @@ extern "C"
         return L_var_out;
     }
 
-    __inline int16 mult_int16(int16 var1, int16 var2)
+    static __inline int16 mult_int16(int16 var1, int16 var2)
     {
         int32 L_var_out;
 
@@ -167,7 +167,7 @@ extern "C"
     }
 
 
-    __inline int16 amr_wb_round(int32 L_var1)
+    static __inline int16 amr_wb_round(int32 L_var1)
     {
         int32 L_var_out;
 
@@ -181,7 +181,7 @@ extern "C"
 
 
 
-    __inline int16 amr_wb_shl1_round(int32 L_var1)
+    static __inline int16 amr_wb_shl1_round(int32 L_var1)
     {
         int32 L_var_out;
 
@@ -194,7 +194,7 @@ extern "C"
         return L_var_out;
     }
 
-    __inline int32 mul_32by16(int16 hi, int16 lo, int16 n)
+    static __inline int32 mul_32by16(int16 hi, int16 lo, int16 n)
     {
         int32 H_32;
         int32 L_32;
@@ -209,7 +209,7 @@ extern "C"
         return (H_32);
     }
 
-    __inline  int32 fxp_mac_16by16(const int16 var1, const int16 var2, int32 L_add)
+    static __inline  int32 fxp_mac_16by16(const int16 var1, const int16 var2, int32 L_add)
     {
         __asm
         {
@@ -218,7 +218,7 @@ extern "C"
         return (L_add);
     }
 
-    __inline  int32 fxp_mul_16by16(int16 var1, const int16 var2)
+    static __inline  int32 fxp_mul_16by16(int16 var1, const int16 var2)
     {
         int32 L_mult;
         __asm
@@ -228,7 +228,7 @@ extern "C"
         return (L_mult);
     }
 
-    __inline  int32 fxp_mul32_by_16b(int32 L_var1, const int32 L_var2)
+    static __inline  int32 fxp_mul32_by_16b(int32 L_var1, const int32 L_var2)
     {
         int32 L_mult;
         __asm

@@ -105,7 +105,7 @@ extern "C"
     ----------------------------------------------------------------------------*/
 #if defined(PV_ARM_V5) /* Instructions for ARM Assembly on ADS*/
 
-    __inline Word32 L_mac(Word32 L_var3, Word16 var1, Word16 var2, Flag *pOverflow)
+    static __inline Word32 L_mac(Word32 L_var3, Word16 var1, Word16 var2, Flag *pOverflow)
     {
         Word32 result;
         Word32 L_sum;
@@ -143,7 +143,7 @@ extern "C"
 
 #else /* C_EQUIVALENT */
 
-    __inline Word32 L_mac(Word32 L_var3, Word16 var1, Word16 var2, Flag *pOverflow)
+    static __inline Word32 L_mac(Word32 L_var3, Word16 var1, Word16 var2, Flag *pOverflow)
     {
         Word32 result;
         Word32 L_sum;
