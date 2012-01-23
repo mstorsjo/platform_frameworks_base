@@ -74,6 +74,7 @@ private:
     sp<ALooper> mLooper;
     sp<AMessage> mNotify;
 
+    int64_t mAACFirstFrameTimeUs;
     sp<ABuffer> mAACCodecSpecificData;
 
     sp<ABuffer> mAACBuffer;
@@ -286,7 +287,7 @@ bool MPEG2TSWriter::SourceInfo::appendAACFrames(MediaBuffer *buffer) {
     }
 
     if (mAACBuffer == NULL) {
-        size_t alloc = 4096;
+        size_t alloc = 1024;
         if (buffer->range_length() + 7 > alloc) {
             alloc = 7 + buffer->range_length();
         }
@@ -369,6 +370,8 @@ void MPEG2TSWriter::SourceInfo::onMessageReceived(const sp<AMessage> &msg) {
     switch (msg->what()) {
         case kWhatStart:
         {
+            sp<MetaData> meta = new MetaData;
+            meta->setInt64(kKeyTime, 700000);
             status_t err = mSource->start();
             if (err != OK) {
                 sp<AMessage> notify = mNotify->dup();
@@ -412,6 +415,7 @@ void MPEG2TSWriter::SourceInfo::onMessageReceived(const sp<AMessage> &msg) {
                            (const uint8_t *)buffer->data()
                             + buffer->range_offset(),
                            buffer->range_length());
+                    msg->post();
                 } else if (buffer->range_length() > 0) {
                     if (mStreamType == 0x0f) {
                         if (!appendAACFrames(buffer)) {
@@ -913,7 +917,7 @@ void MPEG2TSWriter::writeAccessUnit(
     *ptr++ = 0x84;
     *ptr++ = 0x80;
     *ptr++ = 0x05;
-    *ptr++ = 0x20 | (((PTS >> 30) & 7) << 1) | 1;
+    *ptr++ = 0x20 | (((PTS >> 29) & 7) << 1) | 1;
     *ptr++ = (PTS >> 22) & 0xff;
     *ptr++ = (((PTS >> 15) & 0x7f) << 1) | 1;
     *ptr++ = (PTS >> 7) & 0xff;
