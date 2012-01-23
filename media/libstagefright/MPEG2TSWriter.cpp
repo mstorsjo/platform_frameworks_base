@@ -28,6 +28,7 @@
 #include <media/stagefright/MediaSource.h>
 #include <media/stagefright/MetaData.h>
 #include <media/stagefright/Utils.h>
+#include <sys/time.h>
 #include <arpa/inet.h>
 
 #include "include/ESDS.h"
@@ -509,6 +510,9 @@ MPEG2TSWriter::MPEG2TSWriter(
 void MPEG2TSWriter::init() {
     CHECK(mFile != NULL || mWriteFunc != NULL);
 
+    mLastTSWrite.tv_sec = 0;
+    mLastTSWrite.tv_usec = 0;
+
     initCrcTable();
 
     mLooper = new ALooper;
@@ -668,8 +672,8 @@ void MPEG2TSWriter::onMessageReceived(const sp<AMessage> &msg) {
 
                     int64_t timeUs = source->lastAccessUnitTimeUs();
                     if (timeUs < 0) {
-                        minTimeUs = -1;
-                        break;
+                        //minTimeUs = -1;
+                        //break;
                     } else if (minTimeUs < 0 || timeUs < minTimeUs) {
                         minTimeUs = timeUs;
                         minIndex = i;
@@ -974,11 +978,13 @@ void MPEG2TSWriter::writeAccessUnit(
 }
 
 void MPEG2TSWriter::writeTS() {
-    if (mNumTSPacketsWritten >= mNumTSPacketsBeforeMeta) {
+    struct timeval tv, diff = {0, 2E5};
+    gettimeofday(&tv, NULL);
+    timeradd(&mLastTSWrite, &diff, &diff);
+    if (timercmp(&tv, &diff, >)) {
+        mLastTSWrite = tv;
         writeProgramAssociationTable();
         writeProgramMap();
-
-        mNumTSPacketsBeforeMeta = mNumTSPacketsWritten + 2500;
     }
 }
 

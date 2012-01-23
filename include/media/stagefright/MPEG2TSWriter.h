@@ -22,6 +22,7 @@
 #include <media/stagefright/foundation/AHandlerReflector.h>
 #include <media/stagefright/foundation/ALooper.h>
 #include <media/stagefright/MediaWriter.h>
+#include <sys/time.h>
 
 namespace android {
 
@@ -72,6 +73,7 @@ private:
     int mPATContinuityCounter;
     int mPMTContinuityCounter;
     uint32_t mCrcTable[256];
+    struct timeval mLastTSWrite;
 
     void init();
 
